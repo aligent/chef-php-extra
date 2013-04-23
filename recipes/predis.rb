@@ -30,15 +30,16 @@ end
 #  action :install
 #end
 
-directory "/tmp/phpredis" do
+directory "/temp/phpredis" do
   owner "root"
   group "root"
   mode "0755"
   action :create
+  recursive true
 end
 
 
-git "/tmp/phpredis" do
+git "/temp/phpredis" do
   repository "git://github.com/nicolasff/phpredis.git"
   revision node['phpredis']['revision']
   action :sync
@@ -46,8 +47,10 @@ git "/tmp/phpredis" do
 end
 
 bash "make & install phpredis" do
-  cwd "/tmp/phpredis"
+  cwd "/temp/phpredis"
   code <<-EOF
+  export PHP_AUTOCONF=$(which autoconf)
+  export PHP_AUTOHEADER=$(which autoheader)
   phpize
   ./configure
   make && make install
