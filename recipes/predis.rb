@@ -24,10 +24,11 @@ package "make" do
   action :install
 end
 
-# phpize command
-package "php5-dev" do
-  action :install
-end
+### @TODO: This is not compatible with RedHat. Need to fix.
+## phpize command
+#package "php5-dev" do
+#  action :install
+#end
 
 directory "/tmp/phpredis" do
   owner "root"
