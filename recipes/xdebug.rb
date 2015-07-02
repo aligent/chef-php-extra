@@ -28,6 +28,7 @@ if platform?(%w{debian ubuntu})
   package "php5-xdebug"
 elsif platform?(%w{centos redhat fedora amazon scientific})
   php_pear "xdebug" do
+    version "2.2.7"
     action :install
   end
 end
